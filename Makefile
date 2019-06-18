@@ -179,8 +179,8 @@ $(BINDIR)/e2e.test: .init
 
 # Regenerate all files if the gen exes changed or any "types.go" files changed
 .generate_files: .init generators $(TYPES_FILES)
-	# generate apiserver deps
-	$(DOCKER_CMD) $(BUILD_DIR)/update-apiserver-gen.sh
+	# generate api deps
+	$(DOCKER_CMD) $(BUILD_DIR)/update-apis-gen.sh
 	# generate all pkg/client contents
 	$(DOCKER_CMD) $(BUILD_DIR)/update-client-gen.sh
 	touch $@
@@ -245,7 +245,7 @@ verify-docs: .init
 	@$(DOCKER_CMD) verify-links.sh -s .pkg -s .bundler -s _plugins -s _includes -t $(SKIP_HTTP) .
 
 verify-generated: .init generators
-	$(DOCKER_CMD) $(BUILD_DIR)/update-apiserver-gen.sh --verify-only
+	$(DOCKER_CMD) $(BUILD_DIR)/update-apis-gen.sh --verify-only
 
 verify-client-gen: .init generators
 	$(DOCKER_CMD) $(BUILD_DIR)/verify-client-gen.sh
