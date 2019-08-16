@@ -18,9 +18,14 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+readonly CURRENT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+readonly REPO_ROOT_DIR=${CURRENT_DIR}/../../../
+
 export REGISTRY=quay.io/kubernetes-service-catalog/
 
 docker login -u "${QUAY_USERNAME}" -p "${QUAY_PASSWORD}" quay.io
+
+pushd ${REPO_ROOT_DIR}
 
 if [[ "${TRAVIS_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+[a-z]*(-(r|R)(c|C)[0-9]+)*$ ]]; then
     echo "Pushing images with tags '${TRAVIS_TAG}' and 'latest'."
@@ -31,3 +36,5 @@ elif [[ "${TRAVIS_BRANCH}" == "master" ]]; then
 else
     echo "Nothing to deploy"
 fi
+
+popd
