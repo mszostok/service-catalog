@@ -253,6 +253,7 @@ Under the hood the script is executing such flow:
 2. Build Service Catalog images from sources. 
 3. Deploy Service Catalog into cluster. 
 5. Execute [e2e tests](../test/e2e).
+   If test fail then [cluster info](https://github.com/kubernetes/kubernetes/blob/release-1.14/pkg/kubectl/cmd/clusterinfo/clusterinfo_dump.go#L93-L96) from namespace where catalog was installed are dumped.
 6. Delete Kubernetes cluster.
 
 ### Test Running Tips

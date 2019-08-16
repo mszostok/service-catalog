@@ -46,7 +46,8 @@ trap cleanup EXIT
 install::cluster::service_catalog_latest() {
     pushd ${REPO_ROOT_DIR}
     shout "- Building Service Catalog image from sources..."
-    make service-catalog-image
+    env REGISTRY="" VERSION=canary ARCH=amd64 \
+        make service-catalog-image
 
     shout "- Loading Service Catalog image into cluster..."
     kind::load_image service-catalog:canary
@@ -64,7 +65,8 @@ install::cluster::service_catalog_latest() {
 test::prepare_data() {
     shout "- Building User Broker image from sources..."
     pushd ${REPO_ROOT_DIR}
-    make user-broker-image
+    env REGISTRY="" VERSION=canary ARCH=amd64 \
+        make user-broker-image
     popd
 
     shout "- Load User Broker image into cluster..."
