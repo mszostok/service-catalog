@@ -28,6 +28,7 @@ Afterward, see the topics below.
 - [Developer guide](./devguide.md)
 - [Design](./design.md)
 - [Notes on authentication](./auth.md)
+- [Continuous Integration](./ci-flows.md)
 
 ## Topics for operators:
 
